@@ -1,0 +1,691 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>OmniConvert - Universal All-in-One File & Document Converter</title>
+  
+  <!-- PWA Meta Tags & Icons -->
+  <link rel="manifest" href="/manifest.json">
+  <link rel="icon" type="image/x-icon" href="/favicon.ico">
+  <link rel="apple-touch-icon" href="/static/icons/icon-192.png">
+  <meta name="theme-color" content="#0284c7">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <meta name="apple-mobile-web-app-title" content="OmniConvert">
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Google Fonts: Plus Jakarta Sans -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <!-- Custom Stylesheet -->
+  <link rel="stylesheet" href="/static/css/style.css">
+  
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+          },
+          colors: {
+            brand: {
+              50: '#f0f9ff',
+              100: '#e0f2fe',
+              500: '#0284c7',
+              600: '#0369a1',
+              700: '#075985',
+            }
+          }
+        }
+      }
+    }
+  </script>
+</head>
+<body class="bg-slate-50 text-slate-800 min-h-screen flex flex-col font-sans antialiased selection:bg-sky-500 selection:text-white">
+
+  <!-- Toast Notification Container -->
+  <div id="toast-container" class="fixed top-5 right-5 z-50 flex flex-col gap-2 pointer-events-none"></div>
+
+  <!-- Sticky Modern Navbar -->
+  <header class="bg-white/90 backdrop-blur-md sticky top-0 z-40 border-b border-slate-200/80 shadow-xs">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+      
+      <!-- Brand Logo -->
+      <a href="#" class="flex items-center space-x-3 group">
+        <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-sky-600 via-indigo-600 to-purple-600 flex items-center justify-center text-white shadow-md shadow-sky-500/25 group-hover:scale-105 transition-transform">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z"></path></svg>
+        </div>
+        <div>
+          <span class="text-xl font-extrabold bg-gradient-to-r from-sky-600 via-indigo-600 to-purple-600 bg-clip-text text-transparent">OmniConvert</span>
+          <span class="text-[10px] ml-1 px-2 py-0.5 rounded-full bg-emerald-50 text-emerald-700 font-bold border border-emerald-200 uppercase tracking-wider">v2.0 Pro</span>
+        </div>
+      </a>
+
+      <!-- Quick Nav Links -->
+      <nav class="hidden md:flex items-center space-x-6 text-sm font-semibold text-slate-600">
+        <a href="#tools-section" class="hover:text-sky-600 transition-colors">Tools</a>
+        <a href="#exam-specs" class="hover:text-sky-600 transition-colors">Exam Specs Table</a>
+        <a href="#features-info" class="hover:text-sky-600 transition-colors">Why OmniConvert</a>
+        <a href="#faq-section" class="hover:text-sky-600 transition-colors">FAQ</a>
+      </nav>
+
+      <!-- Action Buttons -->
+      <div class="flex items-center gap-3">
+        <!-- Install PWA Button -->
+        <button id="pwa-install-btn" class="hidden items-center gap-1.5 px-3.5 py-1.5 rounded-xl bg-gradient-to-r from-sky-600 to-indigo-600 text-white text-xs sm:text-sm font-semibold shadow-md shadow-sky-500/20 hover:opacity-95 transition-all">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
+          <span>📲 Install App</span>
+        </button>
+        <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-slate-100 text-slate-600 text-xs font-semibold">
+          <span class="w-2 h-2 rounded-full bg-emerald-500"></span> 100% Free
+        </span>
+      </div>
+
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="relative pt-10 pb-8 px-4 max-w-6xl mx-auto text-center">
+    <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-sky-50/80 border border-sky-200 text-sky-800 text-xs sm:text-sm font-medium mb-4 shadow-xs">
+      <span class="flex h-2 w-2 rounded-full bg-sky-500 animate-ping"></span>
+      <span>Sarkari Form Ready • Exact KB Compression • Zero Watermark</span>
+    </div>
+
+    <h1 class="text-3xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-slate-900 leading-tight mb-4">
+      Universal Document & <br class="hidden sm:inline">
+      <span class="bg-gradient-to-r from-sky-600 via-indigo-600 to-purple-600 bg-clip-text text-transparent">File Conversion Studio</span>
+    </h1>
+    
+    <p class="text-slate-600 text-sm sm:text-base max-w-2xl mx-auto leading-relaxed">
+      Passport photo cropping, exact 20KB/50KB compression, SSC/UPSC signature cleaning, PDF merge/split, aur PowerPoint presentations — sab kuch ek hi jagah bina kisi limit ke.
+    </p>
+
+    <!-- Quick Tool Cards Grid -->
+    <div class="mt-8 grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3 max-w-5xl mx-auto text-left">
+      <!-- Card 1 -->
+      <div onclick="quickJump('passport', 'single')" class="group p-3.5 bg-white hover:bg-sky-50/40 rounded-2xl border border-slate-200/90 hover:border-sky-300 shadow-sm hover:shadow-md transition-all cursor-pointer">
+        <div class="w-9 h-9 rounded-xl bg-sky-100 text-sky-600 flex items-center justify-center font-bold text-lg mb-2 group-hover:scale-110 transition-transform">📸</div>
+        <div class="text-xs font-bold text-slate-900">Passport Photo</div>
+        <div class="text-[11px] text-slate-500">3.5x4.5cm / 50KB</div>
+      </div>
+      <!-- Card 2 -->
+      <div onclick="quickJump('passport', 'sheet')" class="group p-3.5 bg-white hover:bg-indigo-50/40 rounded-2xl border border-slate-200/90 hover:border-indigo-300 shadow-sm hover:shadow-md transition-all cursor-pointer">
+        <div class="w-9 h-9 rounded-xl bg-indigo-100 text-indigo-600 flex items-center justify-center font-bold text-lg mb-2 group-hover:scale-110 transition-transform">🖨️</div>
+        <div class="text-xs font-bold text-slate-900">Photo Sheet</div>
+        <div class="text-[11px] text-slate-500">6, 8, 12 on 4x6/A4</div>
+      </div>
+      <!-- Card 3 -->
+      <div onclick="quickJump('passport', 'signature')" class="group p-3.5 bg-white hover:bg-purple-50/40 rounded-2xl border border-slate-200/90 hover:border-purple-300 shadow-sm hover:shadow-md transition-all cursor-pointer">
+        <div class="w-9 h-9 rounded-xl bg-purple-100 text-purple-600 flex items-center justify-center font-bold text-lg mb-2 group-hover:scale-110 transition-transform">✍️</div>
+        <div class="text-xs font-bold text-slate-900">Signature Clean</div>
+        <div class="text-[11px] text-slate-500">White BG • 10-20KB</div>
+      </div>
+      <!-- Card 4 -->
+      <div onclick="quickJump('compress', null)" class="group p-3.5 bg-white hover:bg-amber-50/40 rounded-2xl border border-slate-200/90 hover:border-amber-300 shadow-sm hover:shadow-md transition-all cursor-pointer">
+        <div class="w-9 h-9 rounded-xl bg-amber-100 text-amber-600 flex items-center justify-center font-bold text-lg mb-2 group-hover:scale-110 transition-transform">🗜️</div>
+        <div class="text-xs font-bold text-slate-900">Exact KB Reducer</div>
+        <div class="text-[11px] text-slate-500">Target 20/50/100KB</div>
+      </div>
+      <!-- Card 5 -->
+      <div onclick="quickJump('pdf', 'img2pdf')" class="group p-3.5 bg-white hover:bg-red-50/40 rounded-2xl border border-slate-200/90 hover:border-red-300 shadow-sm hover:shadow-md transition-all cursor-pointer">
+        <div class="w-9 h-9 rounded-xl bg-red-100 text-red-600 flex items-center justify-center font-bold text-lg mb-2 group-hover:scale-110 transition-transform">📄</div>
+        <div class="text-xs font-bold text-slate-900">PDF Tools</div>
+        <div class="text-[11px] text-slate-500">Merge • Split • Images</div>
+      </div>
+      <!-- Card 6 -->
+      <div onclick="quickJump('ppt', 'pdf2ppt')" class="group p-3.5 bg-white hover:bg-orange-50/40 rounded-2xl border border-slate-200/90 hover:border-orange-300 shadow-sm hover:shadow-md transition-all cursor-pointer">
+        <div class="w-9 h-9 rounded-xl bg-orange-100 text-orange-600 flex items-center justify-center font-bold text-lg mb-2 group-hover:scale-110 transition-transform">📊</div>
+        <div class="text-xs font-bold text-slate-900">PPTX Converter</div>
+        <div class="text-[11px] text-slate-500">PDF ➔ Slides Deck</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Interactive Workspace Section -->
+  <main id="tools-section" class="max-w-4xl mx-auto px-4 pb-16 w-full flex-1">
+    
+    <!-- Workspace Navigation Bar -->
+    <div class="flex flex-wrap justify-center gap-1.5 p-1.5 bg-slate-200/70 rounded-2xl max-w-4xl mx-auto border border-slate-300/60 shadow-inner mb-6" id="nav-tabs">
+      <button onclick="switchTab('passport')" class="tab-btn active px-4 py-2.5 rounded-xl text-sm font-semibold transition-all duration-200 flex items-center gap-2 bg-white text-sky-700 shadow-sm" data-tab="passport">
+        <span>📸</span> Passport & Signature
+      </button>
+      <button onclick="switchTab('compress')" class="tab-btn px-4 py-2.5 rounded-xl text-sm font-semibold transition-all duration-200 flex items-center gap-2 text-slate-600 hover:text-slate-900" data-tab="compress">
+        <span>🗜️</span> Exact KB Reducer
+      </button>
+      <button onclick="switchTab('pdf')" class="tab-btn px-4 py-2.5 rounded-xl text-sm font-semibold transition-all duration-200 flex items-center gap-2 text-slate-600 hover:text-slate-900" data-tab="pdf">
+        <span>📄</span> PDF Tools
+      </button>
+      <button onclick="switchTab('ppt')" class="tab-btn px-4 py-2.5 rounded-xl text-sm font-semibold transition-all duration-200 flex items-center gap-2 text-slate-600 hover:text-slate-900" data-tab="ppt">
+        <span>📊</span> PowerPoint (PPT)
+      </button>
+      <button onclick="switchTab('image')" class="tab-btn px-4 py-2.5 rounded-xl text-sm font-semibold transition-all duration-200 flex items-center gap-2 text-slate-600 hover:text-slate-900" data-tab="image">
+        <span>🔄</span> Image Converter
+      </button>
+    </div>
+
+    <!-- 1. PASSPORT & SIGNATURE TAB -->
+    <div id="tab-passport" class="tab-content block space-y-6">
+      <div class="bg-white rounded-3xl p-6 sm:p-8 border border-slate-200/80 shadow-xl shadow-slate-200/50">
+        
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-slate-100 pb-5 mb-6">
+          <div>
+            <h2 class="text-xl font-bold text-slate-900 flex items-center gap-2">
+              <span>Passport Photo & Signature Studio</span>
+            </h2>
+            <p class="text-xs sm:text-sm text-slate-500 mt-0.5">UPSC, SSC, Railway, NTA, Passport Seva ke liye standard dimensions & size.</p>
+          </div>
+          <!-- Sub-mode toggles -->
+          <div class="flex bg-slate-100 p-1 rounded-xl text-xs font-semibold self-start sm:self-center">
+            <button onclick="setPassportMode('single')" id="p-mode-single" class="px-3.5 py-1.5 rounded-lg bg-white shadow-xs text-sky-700">Single Photo</button>
+            <button onclick="setPassportMode('sheet')" id="p-mode-sheet" class="px-3.5 py-1.5 rounded-lg text-slate-600 hover:text-slate-900">Printable Sheet</button>
+            <button onclick="setPassportMode('signature')" id="p-mode-sig" class="px-3.5 py-1.5 rounded-lg text-slate-600 hover:text-slate-900">Signature Cleaner</button>
+          </div>
+        </div>
+
+        <!-- Dropzone with Live Preview & Remove Option -->
+        <div id="passport-dropzone" class="dropzone relative border-2 border-dashed border-slate-300 hover:border-sky-500 rounded-2xl p-8 text-center cursor-pointer transition-all bg-slate-50/50 hover:bg-sky-50/20">
+          <input type="file" id="passport-file-input" accept="image/*" class="hidden">
+          
+          <div id="passport-upload-empty" class="flex flex-col items-center">
+            <div class="w-14 h-14 mb-3 rounded-2xl bg-sky-100 text-sky-600 flex items-center justify-center shadow-inner">
+              <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
+            </div>
+            <p class="font-bold text-slate-800 text-base" id="passport-file-label">Click or Drag & Drop Photo Here</p>
+            <p class="text-xs text-slate-500 mt-1">Supports JPG, PNG, WEBP, HEIC</p>
+          </div>
+
+          <!-- Uploaded file badge preview -->
+          <div id="passport-upload-loaded" class="hidden flex items-center justify-between p-3 bg-white rounded-xl border border-slate-200">
+            <div class="flex items-center gap-3">
+              <img id="passport-input-thumb" src="" alt="Thumbnail" class="w-12 h-12 object-cover rounded-lg border border-slate-200">
+              <div class="text-left">
+                <p id="passport-loaded-name" class="text-sm font-bold text-slate-800 truncate max-w-[200px] sm:max-w-xs">photo.jpg</p>
+                <p id="passport-loaded-size" class="text-xs text-slate-500 font-medium">1.2 MB</p>
+              </div>
+            </div>
+            <button type="button" onclick="clearPassportFile(event)" class="text-xs font-semibold px-2.5 py-1 rounded-lg text-rose-600 hover:bg-rose-50 border border-rose-200">Remove</button>
+          </div>
+
+        </div>
+
+        <!-- Options Container -->
+        <div class="mt-6 grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <!-- Preset selector -->
+          <div id="passport-preset-group">
+            <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5">Size Preset</label>
+            <select id="passport-preset" class="w-full bg-slate-50 border border-slate-300 rounded-xl px-3.5 py-2.5 text-sm font-semibold text-slate-800 focus:ring-2 focus:ring-sky-500 outline-none">
+              <option value="india_standard">India Standard (3.5cm x 4.5cm - UPSC/SSC/Passport)</option>
+              <option value="us_standard">US Visa / Passport (2 x 2 inch / 51x51mm)</option>
+              <option value="pan_card">PAN Card Standard (2.5cm x 3.5cm)</option>
+            </select>
+          </div>
+
+          <!-- Target KB Limit -->
+          <div id="passport-kb-group">
+            <div class="flex justify-between items-center mb-1.5">
+              <label class="text-xs font-bold text-slate-700 uppercase tracking-wider">Exact Target KB Limit</label>
+              <span id="passport-kb-display" class="text-xs font-bold text-sky-600">50 KB</span>
+            </div>
+            <div class="flex items-center gap-2">
+              <input type="number" id="passport-target-kb" value="50" min="5" max="500" class="w-full bg-slate-50 border border-slate-300 rounded-xl px-3.5 py-2 text-sm font-bold text-slate-800 focus:ring-2 focus:ring-sky-500 outline-none">
+              <span class="text-xs font-bold text-slate-500">KB</span>
+            </div>
+            <!-- Quick Chips -->
+            <div class="flex gap-1.5 mt-2">
+              <button type="button" onclick="setPassportKB(20)" class="px-2.5 py-1 rounded-lg text-xs font-semibold bg-slate-100 hover:bg-sky-100 text-slate-700 border border-slate-200">20 KB (SSC/UPSC)</button>
+              <button type="button" onclick="setPassportKB(50)" class="px-2.5 py-1 rounded-lg text-xs font-semibold bg-slate-100 hover:bg-sky-100 text-slate-700 border border-slate-200">50 KB (Standard)</button>
+              <button type="button" onclick="setPassportKB(100)" class="px-2.5 py-1 rounded-lg text-xs font-semibold bg-slate-100 hover:bg-sky-100 text-slate-700 border border-slate-200">100 KB</button>
+            </div>
+          </div>
+
+          <!-- Sheet Options (for sheet mode only) -->
+          <div id="passport-sheet-group" class="hidden sm:col-span-2 grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div>
+              <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5">Photo Paper Size</label>
+              <select id="passport-sheet-type" class="w-full bg-slate-50 border border-slate-300 rounded-xl px-3.5 py-2.5 text-sm font-semibold">
+                <option value="4x6">4x6 Inch Photo Paper (Standard Studio Print)</option>
+                <option value="A4">A4 Full Sheet Paper</option>
+              </select>
+            </div>
+            <div>
+              <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5">Number of Photos on Sheet</label>
+              <select id="passport-sheet-count" class="w-full bg-slate-50 border border-slate-300 rounded-xl px-3.5 py-2.5 text-sm font-semibold">
+                <option value="8">8 Photos (Recommended for 4x6)</option>
+                <option value="6">6 Photos</option>
+                <option value="12">12 Photos (A4)</option>
+                <option value="16">16 Photos (A4)</option>
+                <option value="24">24 Photos (A4)</option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <!-- Action Button -->
+        <button id="btn-process-passport" onclick="processPassport()" class="mt-6 w-full py-3.5 px-6 rounded-2xl bg-gradient-to-r from-sky-600 via-indigo-600 to-purple-600 text-white font-bold text-base shadow-lg shadow-sky-500/25 hover:opacity-95 active:scale-[0.99] transition-all flex items-center justify-center gap-2">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+          <span id="btn-passport-text">Generate Passport Photo</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- 2. EXACT KB REDUCER TAB -->
+    <div id="tab-compress" class="tab-content hidden space-y-6">
+      <div class="bg-white rounded-3xl p-6 sm:p-8 border border-slate-200/80 shadow-xl shadow-slate-200/50">
+        <div class="border-b border-slate-100 pb-5 mb-6">
+          <h2 class="text-xl font-bold text-slate-900">Exact KB Reducer / Compressor</h2>
+          <p class="text-xs sm:text-sm text-slate-500 mt-0.5">Images (JPG, PNG, WEBP) aur PDF files ka size exact KB mein bina visual quality khoe compress karein.</p>
+        </div>
+
+        <div id="compress-dropzone" class="dropzone relative border-2 border-dashed border-slate-300 hover:border-amber-500 rounded-2xl p-8 text-center cursor-pointer transition-all bg-slate-50/50 hover:bg-amber-50/20">
+          <input type="file" id="compress-file-input" accept="image/*,application/pdf" class="hidden">
+          
+          <div id="compress-upload-empty" class="flex flex-col items-center">
+            <div class="w-14 h-14 mb-3 rounded-2xl bg-amber-100 text-amber-600 flex items-center justify-center shadow-inner">
+              <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path></svg>
+            </div>
+            <p class="font-bold text-slate-800 text-base" id="compress-file-label">Upload Image or PDF to Compress</p>
+            <p class="text-xs text-slate-500 mt-1">Supports JPG, PNG, WEBP, and PDF documents</p>
+          </div>
+
+          <div id="compress-upload-loaded" class="hidden flex items-center justify-between p-3 bg-white rounded-xl border border-slate-200">
+            <div class="flex items-center gap-3">
+              <div class="w-10 h-10 rounded-lg bg-amber-100 text-amber-700 font-bold flex items-center justify-center text-xs">FILE</div>
+              <div class="text-left">
+                <p id="compress-loaded-name" class="text-sm font-bold text-slate-800 truncate max-w-[200px] sm:max-w-xs">document.pdf</p>
+                <p id="compress-loaded-size" class="text-xs text-slate-500 font-medium">3.4 MB</p>
+              </div>
+            </div>
+            <button type="button" onclick="clearCompressFile(event)" class="text-xs font-semibold px-2.5 py-1 rounded-lg text-rose-600 hover:bg-rose-50 border border-rose-200">Remove</button>
+          </div>
+        </div>
+
+        <div class="mt-6">
+          <div class="flex justify-between items-center mb-1.5">
+            <label class="text-xs font-bold text-slate-700 uppercase tracking-wider">Target Size (KB)</label>
+            <span id="compress-kb-indicator" class="text-xs font-bold text-amber-600">50 KB</span>
+          </div>
+          <div class="flex items-center gap-3">
+            <input type="number" id="compress-target-kb" value="50" min="5" max="50000" class="w-full bg-slate-50 border border-slate-300 rounded-xl px-3.5 py-2 text-sm font-bold text-slate-800 focus:ring-2 focus:ring-amber-500 outline-none">
+            <span class="text-xs font-bold text-slate-500">KB</span>
+          </div>
+
+          <!-- Quick Chips -->
+          <div class="flex flex-wrap gap-2 mt-3">
+            <span class="text-xs font-semibold text-slate-400 self-center mr-1">Popular Targets:</span>
+            <button type="button" onclick="setCompressKB(20)" class="px-3 py-1 rounded-lg text-xs font-semibold bg-slate-100 hover:bg-amber-100 text-slate-700 border border-slate-200">20 KB (SSC Signature)</button>
+            <button type="button" onclick="setCompressKB(50)" class="px-3 py-1 rounded-lg text-xs font-semibold bg-slate-100 hover:bg-amber-100 text-slate-700 border border-slate-200">50 KB (Photo)</button>
+            <button type="button" onclick="setCompressKB(100)" class="px-3 py-1 rounded-lg text-xs font-semibold bg-slate-100 hover:bg-amber-100 text-slate-700 border border-slate-200">100 KB (Forms)</button>
+            <button type="button" onclick="setCompressKB(200)" class="px-3 py-1 rounded-lg text-xs font-semibold bg-slate-100 hover:bg-amber-100 text-slate-700 border border-slate-200">200 KB (PDF Certificate)</button>
+            <button type="button" onclick="setCompressKB(500)" class="px-3 py-1 rounded-lg text-xs font-semibold bg-slate-100 hover:bg-amber-100 text-slate-700 border border-slate-200">500 KB</button>
+          </div>
+        </div>
+
+        <button id="btn-process-compress" onclick="processCompress()" class="mt-6 w-full py-3.5 px-6 rounded-2xl bg-gradient-to-r from-amber-500 to-orange-600 text-white font-bold text-base shadow-lg shadow-orange-500/25 hover:opacity-95 active:scale-[0.99] transition-all flex items-center justify-center gap-2">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path></svg>
+          <span>Compress to Target Size</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- 3. PDF TOOLS TAB -->
+    <div id="tab-pdf" class="tab-content hidden space-y-6">
+      <div class="bg-white rounded-3xl p-6 sm:p-8 border border-slate-200/80 shadow-xl shadow-slate-200/50">
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-slate-100 pb-5 mb-6">
+          <div>
+            <h2 class="text-xl font-bold text-slate-900">All-in-One PDF Tools</h2>
+            <p class="text-xs sm:text-sm text-slate-500 mt-0.5">Images to PDF, PDF to Images, PDF Merge & Split</p>
+          </div>
+          <div class="flex bg-slate-100 p-1 rounded-xl text-xs font-semibold self-start sm:self-center">
+            <button onclick="setPdfSubMode('img2pdf')" id="pdf-m-img2pdf" class="px-3.5 py-1.5 rounded-lg bg-white shadow-xs text-sky-700">Images ➔ PDF</button>
+            <button onclick="setPdfSubMode('pdf2img')" id="pdf-m-pdf2img" class="px-3.5 py-1.5 rounded-lg text-slate-600 hover:text-slate-900">PDF ➔ Images</button>
+            <button onclick="setPdfSubMode('merge')" id="pdf-m-merge" class="px-3.5 py-1.5 rounded-lg text-slate-600 hover:text-slate-900">Merge</button>
+            <button onclick="setPdfSubMode('split')" id="pdf-m-split" class="px-3.5 py-1.5 rounded-lg text-slate-600 hover:text-slate-900">Split</button>
+          </div>
+        </div>
+
+        <div id="pdf-dropzone" class="dropzone relative border-2 border-dashed border-slate-300 hover:border-red-500 rounded-2xl p-8 text-center cursor-pointer transition-all bg-slate-50/50 hover:bg-red-50/20">
+          <input type="file" id="pdf-file-input" multiple class="hidden">
+          
+          <div id="pdf-upload-empty" class="flex flex-col items-center">
+            <div class="w-14 h-14 mb-3 rounded-2xl bg-red-100 text-red-600 flex items-center justify-center shadow-inner">
+              <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v14a2 2 0 002 2z"></path></svg>
+            </div>
+            <p class="font-bold text-slate-800 text-base" id="pdf-file-label">Select Files for PDF Operation</p>
+            <p class="text-xs text-slate-500 mt-1" id="pdf-file-subtext">You can select multiple images or PDF files</p>
+          </div>
+
+          <div id="pdf-upload-loaded" class="hidden flex items-center justify-between p-3 bg-white rounded-xl border border-slate-200">
+            <div class="text-left">
+              <p id="pdf-loaded-name" class="text-sm font-bold text-slate-800 truncate max-w-xs">3 files selected</p>
+              <p id="pdf-loaded-size" class="text-xs text-slate-500 font-medium">Ready for processing</p>
+            </div>
+            <button type="button" onclick="clearPdfFiles(event)" class="text-xs font-semibold px-2.5 py-1 rounded-lg text-rose-600 hover:bg-rose-50 border border-rose-200">Change Files</button>
+          </div>
+        </div>
+
+        <!-- Split Options -->
+        <div id="pdf-split-options" class="mt-4 hidden">
+          <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5">Page Selection</label>
+          <input type="text" id="pdf-split-range" placeholder="e.g. 1-3, 5 or all" value="all" class="w-full bg-slate-50 border border-slate-300 rounded-xl px-3.5 py-2.5 text-sm font-semibold focus:ring-2 focus:ring-sky-500 outline-none">
+          <p class="text-xs text-slate-500 mt-1">Example: <code class="bg-slate-100 px-1 py-0.5 rounded text-sky-700">1-5</code> extracts pages 1 to 5; <code class="bg-slate-100 px-1 py-0.5 rounded text-sky-700">all</code> extracts each page into separate PDFs.</p>
+        </div>
+
+        <button id="btn-process-pdf" onclick="processPdf()" class="mt-6 w-full py-3.5 px-6 rounded-2xl bg-gradient-to-r from-red-600 to-rose-600 text-white font-bold text-base shadow-lg shadow-red-500/25 hover:opacity-95 active:scale-[0.99] transition-all flex items-center justify-center gap-2">
+          <span id="btn-pdf-text">Convert Images to PDF</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- 4. PPT TOOLS TAB -->
+    <div id="tab-ppt" class="tab-content hidden space-y-6">
+      <div class="bg-white rounded-3xl p-6 sm:p-8 border border-slate-200/80 shadow-xl shadow-slate-200/50">
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-slate-100 pb-5 mb-6">
+          <div>
+            <h2 class="text-xl font-bold text-slate-900">PowerPoint (PPT) Studio</h2>
+            <p class="text-xs sm:text-sm text-slate-500 mt-0.5">PDF ko PowerPoint slides (.pptx) mein convert karein ya Photos se Presentation banayein.</p>
+          </div>
+          <div class="flex bg-slate-100 p-1 rounded-xl text-xs font-semibold self-start sm:self-center">
+            <button onclick="setPptMode('pdf2ppt')" id="ppt-m-pdf2ppt" class="px-3.5 py-1.5 rounded-lg bg-white shadow-xs text-orange-600">PDF ➔ PPTX</button>
+            <button onclick="setPptMode('img2ppt')" id="ppt-m-img2ppt" class="px-3.5 py-1.5 rounded-lg text-slate-600 hover:text-slate-900">Images ➔ PPTX</button>
+          </div>
+        </div>
+
+        <div id="ppt-dropzone" class="dropzone relative border-2 border-dashed border-slate-300 hover:border-orange-500 rounded-2xl p-8 text-center cursor-pointer transition-all bg-slate-50/50 hover:bg-orange-50/20">
+          <input type="file" id="ppt-file-input" accept="application/pdf" class="hidden">
+          
+          <div id="ppt-upload-empty" class="flex flex-col items-center">
+            <div class="w-14 h-14 mb-3 rounded-2xl bg-orange-100 text-orange-600 flex items-center justify-center shadow-inner">
+              <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 13v-1m4 1v-3m4 3V8M8 21l4-4 4 4M3 4h18M4 4h16v12a1 1 0 01-1 1H5a1 1 0 01-1-1V4z"></path></svg>
+            </div>
+            <p class="font-bold text-slate-800 text-base" id="ppt-file-label">Upload PDF Document</p>
+            <p class="text-xs text-slate-500 mt-1">Convert your PDF slides into an editable .pptx presentation</p>
+          </div>
+
+          <div id="ppt-upload-loaded" class="hidden flex items-center justify-between p-3 bg-white rounded-xl border border-slate-200">
+            <div class="text-left">
+              <p id="ppt-loaded-name" class="text-sm font-bold text-slate-800 truncate max-w-xs">slides.pdf</p>
+              <p id="ppt-loaded-size" class="text-xs text-slate-500 font-medium">Ready</p>
+            </div>
+            <button type="button" onclick="clearPptFiles(event)" class="text-xs font-semibold px-2.5 py-1 rounded-lg text-rose-600 hover:bg-rose-50 border border-rose-200">Change</button>
+          </div>
+        </div>
+
+        <button id="btn-process-ppt" onclick="processPpt()" class="mt-6 w-full py-3.5 px-6 rounded-2xl bg-gradient-to-r from-orange-500 to-amber-600 text-white font-bold text-base shadow-lg shadow-orange-500/25 hover:opacity-95 active:scale-[0.99] transition-all flex items-center justify-center gap-2">
+          <span id="btn-ppt-text">Convert PDF to PPTX</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- 5. IMAGE FORMAT & RESIZE TAB -->
+    <div id="tab-image" class="tab-content hidden space-y-6">
+      <div class="bg-white rounded-3xl p-6 sm:p-8 border border-slate-200/80 shadow-xl shadow-slate-200/50">
+        <div class="border-b border-slate-100 pb-5 mb-6">
+          <h2 class="text-xl font-bold text-slate-900">Image Format Converter & Resizer</h2>
+          <p class="text-xs sm:text-sm text-slate-500 mt-0.5">JPG, PNG, WEBP, ICO, BMP formats mein convert aur custom quality adjust karein.</p>
+        </div>
+
+        <div id="image-dropzone" class="dropzone relative border-2 border-dashed border-slate-300 hover:border-indigo-500 rounded-2xl p-8 text-center cursor-pointer transition-all bg-slate-50/50 hover:bg-indigo-50/20">
+          <input type="file" id="image-file-input" accept="image/*" class="hidden">
+          
+          <div id="image-upload-empty" class="flex flex-col items-center">
+            <div class="w-14 h-14 mb-3 rounded-2xl bg-indigo-100 text-indigo-600 flex items-center justify-center shadow-inner">
+              <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
+            </div>
+            <p class="font-bold text-slate-800 text-base" id="image-file-label">Upload Image to Convert</p>
+            <p class="text-xs text-slate-500 mt-1">Supports any image format</p>
+          </div>
+
+          <div id="image-upload-loaded" class="hidden flex items-center justify-between p-3 bg-white rounded-xl border border-slate-200">
+            <div class="flex items-center gap-3">
+              <img id="image-input-thumb" src="" alt="Thumbnail" class="w-12 h-12 object-cover rounded-lg border border-slate-200">
+              <div class="text-left">
+                <p id="image-loaded-name" class="text-sm font-bold text-slate-800 truncate max-w-xs">photo.png</p>
+                <p id="image-loaded-size" class="text-xs text-slate-500 font-medium">950 KB</p>
+              </div>
+            </div>
+            <button type="button" onclick="clearImageFile(event)" class="text-xs font-semibold px-2.5 py-1 rounded-lg text-rose-600 hover:bg-rose-50 border border-rose-200">Change</button>
+          </div>
+        </div>
+
+        <div class="mt-6 grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <div>
+            <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5">Convert To Format</label>
+            <select id="image-target-format" class="w-full bg-slate-50 border border-slate-300 rounded-xl px-3.5 py-2.5 text-sm font-semibold focus:ring-2 focus:ring-indigo-500 outline-none">
+              <option value="PNG">PNG (Lossless / High Quality)</option>
+              <option value="JPEG">JPG / JPEG (Standard Compressed)</option>
+              <option value="WEBP">WEBP (Modern Web Standard - Tiny Size)</option>
+              <option value="ICO">ICO (Favicon / Icon)</option>
+              <option value="BMP">BMP (Bitmap)</option>
+            </select>
+          </div>
+          <div>
+            <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5">Quality (%)</label>
+            <input type="number" id="image-quality" value="92" min="10" max="100" class="w-full bg-slate-50 border border-slate-300 rounded-xl px-3.5 py-2.5 text-sm font-semibold focus:ring-2 focus:ring-indigo-500 outline-none">
+          </div>
+        </div>
+
+        <button id="btn-process-image" onclick="processImageConvert()" class="mt-6 w-full py-3.5 px-6 rounded-2xl bg-gradient-to-r from-indigo-600 to-purple-600 text-white font-bold text-base shadow-lg shadow-indigo-500/25 hover:opacity-95 active:scale-[0.99] transition-all flex items-center justify-center gap-2">
+          <span>Convert Format</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- SHARED RESULT & COMPARISON CARD -->
+    <div id="result-card" class="mt-8 hidden bg-white rounded-3xl p-6 sm:p-8 border border-emerald-300 shadow-xl shadow-emerald-500/10">
+      
+      <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 border-b border-slate-100 pb-5">
+        <div class="flex items-center gap-4">
+          <div class="w-12 h-12 rounded-2xl bg-emerald-100 text-emerald-600 flex items-center justify-center flex-shrink-0 shadow-inner font-bold text-xl">
+            ✓
+          </div>
+          <div>
+            <div class="flex items-center gap-2">
+              <h3 class="text-lg font-bold text-slate-900" id="result-title">Conversion Complete!</h3>
+              <span id="result-savings-badge" class="hidden text-xs font-bold px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-800 border border-emerald-300">-65% Smaller</span>
+            </div>
+            <p class="text-xs sm:text-sm text-slate-500 mt-0.5" id="result-details">Your converted file is ready for download.</p>
+          </div>
+        </div>
+
+        <!-- Action Buttons: Download + Direct Print -->
+        <div class="flex items-center gap-2.5 w-full sm:w-auto">
+          <button id="result-print-btn" onclick="printOutput()" class="hidden px-4 py-3 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold text-sm border border-slate-300 flex items-center justify-center gap-1.5 transition-all">
+            <span>🖨️ Print</span>
+          </button>
+          
+          <a id="result-download-btn" href="#" download class="flex-1 sm:flex-none px-6 py-3 rounded-xl bg-gradient-to-r from-emerald-600 to-teal-600 hover:opacity-95 text-white font-bold text-sm shadow-md shadow-emerald-600/20 flex items-center justify-center gap-2 transition-all">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
+            <span>Download File</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- Preview Box -->
+      <div id="result-preview-container" class="mt-6 flex flex-col items-center hidden">
+        <p class="text-xs font-bold text-slate-400 uppercase tracking-wider mb-3">Live Output Preview</p>
+        <div class="max-h-80 max-w-full overflow-hidden rounded-2xl border border-slate-200 shadow-sm p-1.5 bg-slate-50">
+          <img id="result-preview-img" src="" alt="Output Preview" class="max-h-72 object-contain rounded-xl mx-auto">
+        </div>
+      </div>
+
+    </div>
+
+    <!-- LOADING OVERLAY -->
+    <div id="loading-overlay" class="mt-8 hidden bg-white rounded-3xl p-8 border border-slate-200 shadow-xl text-center">
+      <div class="inline-block animate-spin rounded-full h-10 w-10 border-4 border-sky-500 border-t-transparent mb-3"></div>
+      <p class="text-slate-800 font-bold" id="loading-text">Processing your file...</p>
+      <p class="text-slate-500 text-xs mt-1">Please wait a few moments.</p>
+    </div>
+
+  </main>
+
+  <!-- Government Exam Specifications Cheat Sheet Section -->
+  <section id="exam-specs" class="bg-white border-y border-slate-200 py-12 px-4">
+    <div class="max-w-5xl mx-auto">
+      
+      <div class="text-center mb-8">
+        <span class="text-xs font-bold text-sky-600 uppercase tracking-widest bg-sky-50 px-3 py-1 rounded-full border border-sky-200">Cheat Sheet</span>
+        <h2 class="text-2xl sm:text-3xl font-extrabold text-slate-900 mt-2">Government Exam Requirements Quick Specs</h2>
+        <p class="text-slate-500 text-xs sm:text-sm mt-1">Sarkari forms ke liye exact dimensions aur file size limits (1-Click Preset Loaders)</p>
+      </div>
+
+      <div class="overflow-x-auto rounded-2xl border border-slate-200 shadow-sm">
+        <table class="w-full text-left text-xs sm:text-sm">
+          <thead class="bg-slate-50 border-b border-slate-200 text-slate-700 font-bold">
+            <tr>
+              <th class="p-3.5 sm:p-4">Exam / Form Name</th>
+              <th class="p-3.5 sm:p-4">Photo Size (KB)</th>
+              <th class="p-3.5 sm:p-4">Photo Dimensions</th>
+              <th class="p-3.5 sm:p-4">Signature Limit</th>
+              <th class="p-3.5 sm:p-4 text-right">Action</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-slate-100 text-slate-600 font-medium">
+            <!-- Row 1: UPSC -->
+            <tr class="hover:bg-slate-50/60 transition-colors">
+              <td class="p-3.5 sm:p-4 font-bold text-slate-900">UPSC (CSE / NDA / CDS)</td>
+              <td class="p-3.5 sm:p-4"><span class="px-2 py-0.5 rounded bg-sky-50 text-sky-700 font-bold">20 KB – 50 KB</span></td>
+              <td class="p-3.5 sm:p-4">3.5cm x 4.5cm</td>
+              <td class="p-3.5 sm:p-4"><span class="px-2 py-0.5 rounded bg-purple-50 text-purple-700 font-bold">10 KB – 20 KB</span></td>
+              <td class="p-3.5 sm:p-4 text-right">
+                <button onclick="applyExamPreset('india_standard', 50)" class="px-3 py-1 rounded-lg text-xs font-bold bg-sky-100 text-sky-700 hover:bg-sky-200 transition-colors">Load Preset</button>
+              </td>
+            </tr>
+            <!-- Row 2: SSC -->
+            <tr class="hover:bg-slate-50/60 transition-colors">
+              <td class="p-3.5 sm:p-4 font-bold text-slate-900">SSC (CGL / CHSL / MTS / GD)</td>
+              <td class="p-3.5 sm:p-4"><span class="px-2 py-0.5 rounded bg-sky-50 text-sky-700 font-bold">20 KB – 50 KB</span></td>
+              <td class="p-3.5 sm:p-4">3.5cm x 4.5cm</td>
+              <td class="p-3.5 sm:p-4"><span class="px-2 py-0.5 rounded bg-purple-50 text-purple-700 font-bold">10 KB – 20 KB</span></td>
+              <td class="p-3.5 sm:p-4 text-right">
+                <button onclick="applyExamPreset('india_standard', 50)" class="px-3 py-1 rounded-lg text-xs font-bold bg-sky-100 text-sky-700 hover:bg-sky-200 transition-colors">Load Preset</button>
+              </td>
+            </tr>
+            <!-- Row 3: Banking IBPS -->
+            <tr class="hover:bg-slate-50/60 transition-colors">
+              <td class="p-3.5 sm:p-4 font-bold text-slate-900">IBPS / SBI (PO & Clerk)</td>
+              <td class="p-3.5 sm:p-4"><span class="px-2 py-0.5 rounded bg-sky-50 text-sky-700 font-bold">20 KB – 50 KB</span></td>
+              <td class="p-3.5 sm:p-4">200 x 230 px</td>
+              <td class="p-3.5 sm:p-4"><span class="px-2 py-0.5 rounded bg-purple-50 text-purple-700 font-bold">10 KB – 20 KB</span></td>
+              <td class="p-3.5 sm:p-4 text-right">
+                <button onclick="applyExamPreset('india_standard', 50)" class="px-3 py-1 rounded-lg text-xs font-bold bg-sky-100 text-sky-700 hover:bg-sky-200 transition-colors">Load Preset</button>
+              </td>
+            </tr>
+            <!-- Row 4: NTA NEET / JEE -->
+            <tr class="hover:bg-slate-50/60 transition-colors">
+              <td class="p-3.5 sm:p-4 font-bold text-slate-900">NTA (NEET UG / JEE Main)</td>
+              <td class="p-3.5 sm:p-4"><span class="px-2 py-0.5 rounded bg-sky-50 text-sky-700 font-bold">10 KB – 200 KB</span></td>
+              <td class="p-3.5 sm:p-4">3.5cm x 4.5cm</td>
+              <td class="p-3.5 sm:p-4"><span class="px-2 py-0.5 rounded bg-purple-50 text-purple-700 font-bold">4 KB – 30 KB</span></td>
+              <td class="p-3.5 sm:p-4 text-right">
+                <button onclick="applyExamPreset('india_standard', 100)" class="px-3 py-1 rounded-lg text-xs font-bold bg-sky-100 text-sky-700 hover:bg-sky-200 transition-colors">Load Preset</button>
+              </td>
+            </tr>
+            <!-- Row 5: US Visa -->
+            <tr class="hover:bg-slate-50/60 transition-colors">
+              <td class="p-3.5 sm:p-4 font-bold text-slate-900">US Visa / DS-160 Form</td>
+              <td class="p-3.5 sm:p-4"><span class="px-2 py-0.5 rounded bg-sky-50 text-sky-700 font-bold">Under 240 KB</span></td>
+              <td class="p-3.5 sm:p-4">2 x 2 inch (600x600 px)</td>
+              <td class="p-3.5 sm:p-4">N/A</td>
+              <td class="p-3.5 sm:p-4 text-right">
+                <button onclick="applyExamPreset('us_standard', 200)" class="px-3 py-1 rounded-lg text-xs font-bold bg-sky-100 text-sky-700 hover:bg-sky-200 transition-colors">Load Preset</button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Why OmniConvert / Features Section -->
+  <section id="features-info" class="py-14 px-4 max-w-5xl mx-auto">
+    <div class="text-center mb-10">
+      <h2 class="text-2xl sm:text-3xl font-extrabold text-slate-900">Built for Everyday Speed & 100% Privacy</h2>
+      <p class="text-slate-500 text-xs sm:text-sm mt-1">Kyun lakhon cyber cafes aur students OmniConvert pasand karte hain</p>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+      <div class="p-6 rounded-3xl bg-white border border-slate-200 shadow-sm">
+        <div class="w-12 h-12 rounded-2xl bg-sky-100 text-sky-600 flex items-center justify-center font-bold text-2xl mb-4">🔒</div>
+        <h3 class="text-base font-bold text-slate-900 mb-2">100% Privacy & Data Security</h3>
+        <p class="text-xs sm:text-sm text-slate-600 leading-relaxed">Aapki photos ya personal documents kisi server par permanently save nahi hote. Sab kuch secure temporary buffer mein process hota hai.</p>
+      </div>
+
+      <div class="p-6 rounded-3xl bg-white border border-slate-200 shadow-sm">
+        <div class="w-12 h-12 rounded-2xl bg-indigo-100 text-indigo-600 flex items-center justify-center font-bold text-2xl mb-4">⚡</div>
+        <h3 class="text-base font-bold text-slate-900 mb-2">Binary Search KB Precision</h3>
+        <p class="text-xs sm:text-sm text-slate-600 leading-relaxed">Dusri websites par compress karne se ya toh size bada reh jata hai ya photo blur ho jati hai. Hamara AI algorithm exact target KB achieve karta hai.</p>
+      </div>
+
+      <div class="p-6 rounded-3xl bg-white border border-slate-200 shadow-sm">
+        <div class="w-12 h-12 rounded-2xl bg-emerald-100 text-emerald-600 flex items-center justify-center font-bold text-2xl mb-4">🖨️</div>
+        <h3 class="text-base font-bold text-slate-900 mb-2">Ready to Print Sheets</h3>
+        <p class="text-xs sm:text-sm text-slate-600 leading-relaxed">Ek photo se 4x6 photo paper ya A4 paper par 8 ya 12 photos ki sheet banayein cutting lines ke saath, aur seedha printer par print karein.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ Section -->
+  <section id="faq-section" class="bg-slate-100/70 border-t border-slate-200 py-12 px-4">
+    <div class="max-w-4xl mx-auto">
+      <div class="text-center mb-8">
+        <h2 class="text-2xl font-extrabold text-slate-900">Frequently Asked Questions (FAQ)</h2>
+        <p class="text-slate-500 text-xs sm:text-sm mt-1">Aam sawal aur unke jawab</p>
+      </div>
+
+      <div class="space-y-3">
+        <details class="group bg-white p-4 rounded-2xl border border-slate-200/80 shadow-xs cursor-pointer">
+          <summary class="font-bold text-sm text-slate-800 list-none flex justify-between items-center">
+            <span>Sarkari form ke liye exact 20KB se 50KB photo kaise banayein?</span>
+            <span class="text-slate-400 group-open:rotate-180 transition-transform">▼</span>
+          </summary>
+          <p class="text-xs sm:text-sm text-slate-600 mt-2 leading-relaxed">
+            "Passport & Signature" tab par jaayein, apni photo upload karein, preset mein "India Standard (3.5x4.5cm)" chunein aur Target KB mein "50" dalein. Button dabate hi system automatically photo crop karega aur 50KB ke andar file de dega.
+          </p>
+        </details>
+
+        <details class="group bg-white p-4 rounded-2xl border border-slate-200/80 shadow-xs cursor-pointer">
+          <summary class="font-bold text-sm text-slate-800 list-none flex justify-between items-center">
+            <span>Mobile phone par ise app ki tarah kaise chalayein?</span>
+            <span class="text-slate-400 group-open:rotate-180 transition-transform">▼</span>
+          </summary>
+          <p class="text-xs sm:text-sm text-slate-600 mt-2 leading-relaxed">
+            Website ko Chrome mein open karein aur top right par 3 dots (⋮) par tap karke "Install App" ya "Add to Home Screen" dabayein. iPhone par Safari ke Share icon par tap karke "Add to Home Screen" chunein.
+          </p>
+        </details>
+
+        <details class="group bg-white p-4 rounded-2xl border border-slate-200/80 shadow-xs cursor-pointer">
+          <summary class="font-bold text-sm text-slate-800 list-none flex justify-between items-center">
+            <span>Kya PDF to PowerPoint conversion free hai?</span>
+            <span class="text-slate-400 group-open:rotate-180 transition-transform">▼</span>
+          </summary>
+          <p class="text-xs sm:text-sm text-slate-600 mt-2 leading-relaxed">
+            Ji haan! 100% free hai, bina kisi login, subscription ya watermark ke. Har slide high-resolution 16:9 widescreen format mein convert hoti hai.
+          </p>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <!-- Modern Footer -->
+  <footer class="bg-white border-t border-slate-200 py-8 text-center text-xs text-slate-500">
+    <div class="max-w-7xl mx-auto px-4 flex flex-col sm:flex-row items-center justify-between gap-4">
+      <div class="flex items-center gap-2">
+        <span class="font-bold text-slate-800">OmniConvert</span>
+        <span>• Universal All-in-One File & Document Studio</span>
+      </div>
+      <div>
+        <span>Fast, Private & In-Browser Processing • No Signup Required</span>
+      </div>
+    </div>
+  </footer>
+
+  <!-- App Script -->
+  <script src="/static/js/app.js"></script>
+</body>
+</html>
