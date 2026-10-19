@@ -9,12 +9,14 @@
 [![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-38B2AC?style=flat&logo=tailwind-css&logoColor=white)](https://tailwindcss.com)
 [![PWA Ready](https://img.shields.io/badge/PWA-Installable-blueviolet?style=flat&logo=pwa&logoColor=white)](https://web.dev/progressive-web-apps/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
-[![Deployed on Vercel](https://img.shields.io/badge/Deployed%20on-Vercel-000000?style=flat&logo=vercel&logoColor=white)](https://vercel.com)
+[![Deployed on Vercel](https://img.shields.io/badge/Live%20Site-omni--converter--web.vercel.app-000000?style=flat&logo=vercel&logoColor=white)](https://omni-converter-web.vercel.app)
 
 **Fast, secure, and privacy-first web application designed for students, cyber cafes, job applicants, and professionals.**  
 Convert documents, generate passport photo sheets, clean signatures, compress images/PDFs to exact KB sizes, and convert PDFs to PowerPoint presentations.
 
-[Explore Features](#-features) • [Quick Start](#-quick-start) • [Exam Specs](#-government-exam-presets) • [Contributing](CONTRIBUTING.md)
+### 🌐 [Click Here to Open Live Website](https://omni-converter-web.vercel.app)
+
+[Live App](https://omni-converter-web.vercel.app) • [Features](#-features) • [Exam Specs](#-government-exam-presets) • [PWA Mobile App](#-mobile--pwa-installation) • [Contributing](CONTRIBUTING.md)
 
 </div>
 
@@ -98,42 +100,14 @@ omni-converter/
 
 ---
 
-## 🚀 Quick Start
+## 🌐 Live Website & Online Access
 
-### Prerequisites
-* Python 3.9 or higher
+You can use OmniConvert directly on the web on any device (phone, tablet, PC):  
+👉 **[https://omni-converter-web.vercel.app](https://omni-converter-web.vercel.app)**
 
-### Local Development Setup
-
-1. **Clone the repository:**
-   ```bash
-   git clone https://github.com/vaibhavtevatia7946/omni-converter.git
-   cd omni-converter
-   ```
-
-2. **Create and activate a virtual environment:**
-   ```bash
-   python3 -m venv venv
-   source venv/bin/activate  # On Windows: venv\Scripts\activate
-   ```
-
-3. **Install dependencies:**
-   ```bash
-   pip install -r requirements.txt
-   ```
-
-4. **Run the automated test suite:**
-   ```bash
-   python test_converter.py
-   ```
-
-5. **Start the server:**
-   ```bash
-   ./run.sh
-   # Or manually:
-   uvicorn main:app --host 127.0.0.1 --port 8000 --reload
-   ```
-   Open **http://127.0.0.1:8000** in your browser.
+* **No setup required:** Open the URL in any browser.
+* **100% Free Forever:** Zero subscriptions, zero ads, zero watermarks.
+* **Privacy First:** Documents and photos are processed in memory and never permanently stored.
 
 ---
 
