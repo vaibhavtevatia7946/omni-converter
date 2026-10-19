@@ -7,7 +7,7 @@
 
 <br/>
 
-[![CI Test Suite](https://github.com/vaibhavtevatia7946/omni-converter-web/actions/workflows/ci.yml/badge.svg)](https://github.com/vaibhavtevatia7946/omni-converter-web/actions)
+[![CI Test Suite](https://github.com/vaibhavtevatia7946/omni-converter/actions/workflows/ci.yml/badge.svg)](https://github.com/vaibhavtevatia7946/omni-converter/actions)
 [![Python Version](https://img.shields.io/badge/Python-3.9%2B-3776AB?style=flat&logo=python&logoColor=white)](https://python.org)
 [![FastAPI](https://img.shields.io/badge/FastAPI-0.100%2B-009688?style=flat&logo=fastapi&logoColor=white)](https://fastapi.tiangolo.com)
 [![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-38B2AC?style=flat&logo=tailwind-css&logoColor=white)](https://tailwindcss.com)
