@@ -17,26 +17,28 @@ app = FastAPI(
     version="1.0.0"
 )
 
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+
 # Mount static directory
-app.mount("/static", StaticFiles(directory="static"), name="static")
+app.mount("/static", StaticFiles(directory=os.path.join(BASE_DIR, "static")), name="static")
 
 @app.get("/", response_class=HTMLResponse)
 async def read_root():
-    template_path = os.path.join(os.path.dirname(__file__), "templates", "index.html")
+    template_path = os.path.join(BASE_DIR, "templates", "index.html")
     with open(template_path, "r", encoding="utf-8") as f:
         return f.read()
 
 @app.get("/manifest.json")
 async def get_manifest():
-    return FileResponse("static/manifest.json", media_type="application/manifest+json")
+    return FileResponse(os.path.join(BASE_DIR, "static", "manifest.json"), media_type="application/manifest+json")
 
 @app.get("/service-worker.js")
 async def get_service_worker():
-    return FileResponse("static/service-worker.js", media_type="application/javascript")
+    return FileResponse(os.path.join(BASE_DIR, "static", "service-worker.js"), media_type="application/javascript")
 
 @app.get("/favicon.ico")
 async def get_favicon():
-    return FileResponse("static/favicon.ico", media_type="image/x-icon")
+    return FileResponse(os.path.join(BASE_DIR, "static", "favicon.ico"), media_type="image/x-icon")
 
 
 # ----------------- PASSPORT PHOTO & SIGNATURE -----------------
