@@ -3,20 +3,21 @@
 # ⚡ OmniConvert
 ### Universal All-in-One File, Document & Passport Photo Studio
 
-[![CI Test Suite](https://github.com/vaibhavtevatia7946/omni-converter/actions/workflows/ci.yml/badge.svg)](https://github.com/vaibhavtevatia7946/omni-converter/actions)
+[![Live Website](https://img.shields.io/badge/Live%20Website-omni--converter--web.vercel.app-000000?style=for-the-badge&logo=vercel&logoColor=white)](https://omni-converter-web.vercel.app)
+
+<br/>
+
+[![CI Test Suite](https://github.com/vaibhavtevatia7946/omni-converter-web/actions/workflows/ci.yml/badge.svg)](https://github.com/vaibhavtevatia7946/omni-converter-web/actions)
 [![Python Version](https://img.shields.io/badge/Python-3.9%2B-3776AB?style=flat&logo=python&logoColor=white)](https://python.org)
 [![FastAPI](https://img.shields.io/badge/FastAPI-0.100%2B-009688?style=flat&logo=fastapi&logoColor=white)](https://fastapi.tiangolo.com)
 [![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-38B2AC?style=flat&logo=tailwind-css&logoColor=white)](https://tailwindcss.com)
 [![PWA Ready](https://img.shields.io/badge/PWA-Installable-blueviolet?style=flat&logo=pwa&logoColor=white)](https://web.dev/progressive-web-apps/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
-[![Deployed on Vercel](https://img.shields.io/badge/Live%20Site-omni--converter--web.vercel.app-000000?style=flat&logo=vercel&logoColor=white)](https://omni-converter-web.vercel.app)
 
 **Fast, secure, and privacy-first web application designed for students, cyber cafes, job applicants, and professionals.**  
 Convert documents, generate passport photo sheets, clean signatures, compress images/PDFs to exact KB sizes, and convert PDFs to PowerPoint presentations.
 
-### 🌐 [Click Here to Open Live Website](https://omni-converter-web.vercel.app)
-
-[Live App](https://omni-converter-web.vercel.app) • [Features](#-features) • [Exam Specs](#-government-exam-presets) • [PWA Mobile App](#-mobile--pwa-installation) • [Contributing](CONTRIBUTING.md)
+[Features](#-key-features) • [Exam Specs](#-government-exam-presets) • [PWA App](#-mobile--pwa-installation) • [Contributing](CONTRIBUTING.md)
 
 </div>
 
