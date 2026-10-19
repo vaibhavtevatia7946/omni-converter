@@ -1,50 +1,176 @@
-# ⚡ OmniConvert - Universal All-in-One File & Document Converter
+<div align="center">
 
-OmniConvert ek complete web application hai jo daily aur government job form requirements ko ek hi jagah solve karta hai.
+# ⚡ OmniConvert
+### Universal All-in-One File, Document & Passport Photo Studio
 
----
+[![CI Test Suite](https://github.com/vaibhavtevatia7946/omni-converter/actions/workflows/ci.yml/badge.svg)](https://github.com/vaibhavtevatia7946/omni-converter/actions)
+[![Python Version](https://img.shields.io/badge/Python-3.9%2B-3776AB?style=flat&logo=python&logoColor=white)](https://python.org)
+[![FastAPI](https://img.shields.io/badge/FastAPI-0.100%2B-009688?style=flat&logo=fastapi&logoColor=white)](https://fastapi.tiangolo.com)
+[![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-38B2AC?style=flat&logo=tailwind-css&logoColor=white)](https://tailwindcss.com)
+[![PWA Ready](https://img.shields.io/badge/PWA-Installable-blueviolet?style=flat&logo=pwa&logoColor=white)](https://web.dev/progressive-web-apps/)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
+[![Deployed on Vercel](https://img.shields.io/badge/Deployed%20on-Vercel-000000?style=flat&logo=vercel&logoColor=white)](https://vercel.com)
 
-## 🌟 Features Included
+**Fast, secure, and privacy-first web application designed for students, cyber cafes, job applicants, and professionals.**  
+Convert documents, generate passport photo sheets, clean signatures, compress images/PDFs to exact KB sizes, and convert PDFs to PowerPoint presentations.
 
-### 1. 📸 Passport Photo & Signature Maker
-- **Single Passport Photo:** Standard Indian (3.5cm x 4.5cm), US Visa (2x2 inch), aur PAN Card sizes with borders.
-- **Exact KB Control:** Photo ka size form requirements ke mutabik (e.g. under 20KB, 50KB, 100KB) adjust hota hai.
-- **Printable Photo Sheets:** 4x6 inch studio paper ya A4 sheet par 6, 8, 12, 16, 24 photos with cutting guidelines.
-- **Signature Cleaner:** Signature photo ka background pure white karta hai aur ink ko crisp dark black/blue banata hai (10-20KB limit).
+[Explore Features](#-features) • [Quick Start](#-quick-start) • [Exam Specs](#-government-exam-presets) • [Contributing](CONTRIBUTING.md)
 
-### 2. 🗜️ Exact KB Reducer / Compressor
-- Images (JPG, PNG, WEBP) aur PDF files ko exact target size (e.g. 20KB, 50KB, 100KB, 200KB, 500KB) mein compress karta hai bina visual quality lose kiye.
-
-### 3. 📄 PDF Tools
-- **Images ➔ PDF:** Multiple photos ko ek clean PDF document banayein.
-- **PDF ➔ Images:** PDF ke saare pages high-resolution PNG format mein extract karein (ZIP download).
-- **Merge PDF:** Multiple PDFs ko ek single file mein jodein.
-- **Split PDF:** Specific pages ya saare pages alag karein.
-
-### 4. 📊 PowerPoint (PPT) Converter
-- **PDF ➔ PPTX:** PDF documents ko PowerPoint presentation slides mein convert karein.
-- **Images ➔ PPTX:** Photos se widescreen (16:9) slide deck banayein.
-
-### 5. 🔄 Image Format & Resizer
-- JPG ⇄ PNG ⇄ WEBP ⇄ ICO ⇄ BMP conversions with custom quality settings.
+</div>
 
 ---
 
-## 🚀 How to Run
+## 🌟 Key Features
 
-1. Open Terminal and go to the directory:
+### 1. 📸 Passport Photo & Signature Studio
+* **Single Passport Photo:** Standard Indian (3.5cm × 4.5cm), US Visa / DS-160 (2×2 inch / 600×600 px), and PAN Card dimensions.
+* **Exact KB Control:** Guarantees final photo size is strictly under official limits (e.g. `20 KB`, `50 KB`, `100 KB`).
+* **Printable Studio Sheets:** Arranges photos automatically onto standard **4×6 inch photo paper** (6 or 8 photos) or **A4 sheets** (12, 16, 24 photos) with dashed cutting guidelines.
+* **Direct Print Button:** Prints crisp sheets directly to any attached printer with dedicated `@media print` layout.
+* **Signature Cleaner:** Turns discolored/shadowed paper to pure white and enhances ink contrast for government portal approval (10–20KB).
+
+### 2. 🗜️ Smart Exact KB Reducer (Binary Search Compression)
+* **Zero Guesswork:** Achieves exact target file sizes without manual trial & error.
+* **Image & PDF Compression:** Supports JPG, PNG, WEBP, and multi-page PDF documents.
+* **Auto Dimension Downscaling:** Gracefully downsamples ultra-high resolution camera photos (50MP) if quality reduction alone exceeds the target KB.
+
+### 3. 📄 Comprehensive PDF Tools
+* **Images ➔ PDF:** Combines one or multiple photos into a clean, unified PDF.
+* **PDF ➔ Images:** Renders all PDF pages as high-resolution PNG images (instant 1-click ZIP download).
+* **Merge PDF:** Combines multiple PDFs into a single file with stream deduplication.
+* **Split PDF:** Extracts page ranges (e.g., `1-3, 5`) or splits all pages into separate files.
+
+### 4. 📊 PowerPoint (PPTX) Studio
+* **PDF ➔ PPTX:** Converts PDF slides into Microsoft PowerPoint (`.pptx`) presentations.
+* **Images ➔ PPTX:** Creates a widescreen (16:9) presentation slide deck from image batches.
+
+### 5. 🔄 Image Format Converter & Resizer
+* Instant conversions between **JPG, PNG, WEBP, ICO (Favicon), and BMP**.
+* Custom quality and dimension resizing with aspect-ratio preservation.
+
+---
+
+## 📋 Government Exam Presets
+
+OmniConvert includes built-in 1-click preset loaders for major Indian and international entrance/job forms:
+
+| Exam / Agency | Photo Dimensions | Photo File Size | Signature Specs |
+| :--- | :---: | :---: | :---: |
+| **UPSC (CSE / NDA / CDS)** | 3.5cm × 4.5cm | 20 KB – 50 KB | 10 KB – 20 KB |
+| **SSC (CGL / CHSL / MTS / GD)** | 3.5cm × 4.5cm | 20 KB – 50 KB | 10 KB – 20 KB |
+| **IBPS / SBI (PO & Clerk)** | 200 × 230 px | 20 KB – 50 KB | 10 KB – 20 KB |
+| **NTA (NEET UG / JEE Main)** | 3.5cm × 4.5cm | 10 KB – 200 KB | 4 KB – 30 KB |
+| **US Visa / DS-160** | 2 × 2 inch (600×600 px) | Under 240 KB | N/A |
+
+---
+
+## 🏗️ Architecture & Project Structure
+
+```
+omni-converter/
+├── .github/
+│   └── workflows/
+│       └── ci.yml               # GitHub Actions CI workflow
+├── api/
+│   └── index.py                 # Vercel Serverless Function entry point
+├── static/
+│   ├── css/
+│   │   └── style.css            # Custom animations, toasts & print styles
+│   ├── icons/                   # PWA app icons (192x192, 512x512)
+│   ├── js/
+│   │   └── app.js               # Frontend controller, drag & drop, PWA installer
+│   ├── manifest.json            # Web App Manifest for mobile/desktop install
+│   └── service-worker.js        # Offline caching and performance optimization
+├── templates/
+│   └── index.html               # Responsive Tailwind CSS single-page interface
+├── utils/
+│   ├── compressor.py            # Binary search KB compression (Images & PDFs)
+│   ├── passport.py              # Passport crop, 4x6/A4 photo sheets, signature enhancer
+│   ├── pdf_tools.py             # PyMuPDF-powered PDF merge, split, extract
+│   ├── ppt_tools.py             # python-pptx conversion engine
+│   └── image_converter.py       # Multi-format conversion & resizer
+├── launch_desktop.py            # 1-Click standalone native desktop app launcher
+├── main.py                      # FastAPI web server and routing
+├── requirements.txt             # Project dependencies
+├── test_converter.py            # Automated unit test suite
+└── vercel.json                  # Serverless deployment configuration
+```
+
+---
+
+## 🚀 Quick Start
+
+### Prerequisites
+* Python 3.9 or higher
+
+### Local Development Setup
+
+1. **Clone the repository:**
    ```bash
-   cd /Users/vaibhav/.gemini/antigravity/scratch/omni-converter
+   git clone https://github.com/vaibhavtevatia7946/omni-converter.git
+   cd omni-converter
    ```
 
-2. Run the start script:
+2. **Create and activate a virtual environment:**
+   ```bash
+   python3 -m venv venv
+   source venv/bin/activate  # On Windows: venv\Scripts\activate
+   ```
+
+3. **Install dependencies:**
+   ```bash
+   pip install -r requirements.txt
+   ```
+
+4. **Run the automated test suite:**
+   ```bash
+   python test_converter.py
+   ```
+
+5. **Start the server:**
    ```bash
    ./run.sh
+   # Or manually:
+   uvicorn main:app --host 127.0.0.1 --port 8000 --reload
    ```
-   *Ya seedha command:*
-   ```bash
-   ./venv/bin/uvicorn main:app --host 127.0.0.1 --port 8000 --reload
-   ```
+   Open **http://127.0.0.1:8000** in your browser.
 
-3. Open your browser at:
-   **http://127.0.0.1:8000**
+---
+
+## 💻 Standalone Desktop Mode
+
+Run OmniConvert as a dedicated borderless desktop application (no browser address bar):
+```bash
+python launch_desktop.py
+```
+
+---
+
+## 📱 Mobile & PWA Installation
+
+* **Android (Chrome):** Visit the site and tap **"📲 Install App"** in the top navigation bar or select **Add to Home screen** from the browser menu.
+* **iPhone / iPad (Safari):** Tap the **Share (⎙)** button and select **Add to Home Screen**.
+
+---
+
+## ☁️ Deployment
+
+### Deploy to Vercel
+The repository includes a production-ready `vercel.json` and `api/index.py`:
+1. Push your code to GitHub.
+2. Import the repository into [Vercel](https://vercel.com/new).
+3. Click **Deploy**. Vercel will automatically build and deploy the serverless app.
+
+---
+
+## 🔒 Privacy & Security
+
+* **In-Memory Processing:** All image cropping, PDF manipulation, and conversions are handled directly in memory buffers (`io.BytesIO`).
+* **Zero Long-Term Storage:** Files are never written to permanent disk storage or shared with third parties.
+* **100% Free & Open Source:** No subscription, no logins, and no watermarks.
+
+---
+
+## 📄 License
+
+This project is licensed under the [MIT License](LICENSE) - feel free to use, modify, and distribute it for personal and commercial projects.
