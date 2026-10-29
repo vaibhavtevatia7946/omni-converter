@@ -1,5 +1,5 @@
 <div align="center">
-DDD
+
 # ⚡ OmniConvert
 ### Universal All-in-One File, Document & Passport Photo Studio
 
