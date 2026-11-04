@@ -1,6 +1,6 @@
 <div align="center">
 
-# ⚡ OmniConvertk
+# ⚡ OmniConvert
 ### Universal All-in-One File, Document & Passport Photo Studio
 
 [![Live Website](https://img.shields.io/badge/Live%20Website-omni--converter--web.vercel.app-000000?style=for-the-badge&logo=vercel&logoColor=white)](https://omni-converter-web.vercel.app)
