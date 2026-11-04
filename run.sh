@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/bash,
 # Script to launch OmniConvert Web Application
 
 cd "$(dirname "$0")"
