@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-OmniConvert Native Desktop App Launchers
+OmniConvert Native Desktop App Launcher
 Launches the converter as a dedicated standalone desktop application window.
 """
 import sys
