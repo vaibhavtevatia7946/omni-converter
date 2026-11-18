@@ -1,4 +1,4 @@
-import i
+import io
 from PIL import Image, ImageOps, ImageDraw, ImageEnhance
 
 # Standard DPI for printing
