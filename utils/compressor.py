@@ -1,6 +1,6 @@
 import io
 import fitz  # PyMuPDF
-from PIL import Image, ImageOps
+from PIL import Image, ImageOp
 
 def compress_image_to_target_kb(image_bytes: bytes, target_kb: int, output_format: str = "JPEG") -> tuple[bytes, float, int, int]:
     """
