@@ -1,4 +1,4 @@
-# Contributing to OmniConvert
+# Contributing to OmniConverts
 
 Thank you for your interest in contributing to **OmniConvert**! We welcome all contributions from bug fixes to feature requests.
 
